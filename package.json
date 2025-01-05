@@ -3,7 +3,7 @@
   "main": "expo-router/entry",
   "version": "0.0.1",
   "scripts": {
-    "start": "expo start --clear",
+    "start": "expo start --clear --android",
     "dev": "expo start",
     "build-android": "eas build -p android --profile development",
     "android": "expo start --android",
