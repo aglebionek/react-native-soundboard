@@ -1,27 +1,29 @@
-import { Button, Text, View, StyleSheet, Pressable } from 'react-native';
-import { ScrollView, GestureHandlerRootView, FlatList } from 'react-native-gesture-handler';
+import { GestureHandlerRootView, FlatList } from 'react-native-gesture-handler';
+
 import { useAudioData } from '@/contexts/AudioDataContext';
-import { ThemedView } from '@/components/ThemedView';
-import { Ionicons } from '@expo/vector-icons';
+import FavSoundListItem from '@/components/FavSoundListItem';
 
 const Favorites = () => {
-  const { audioData, currentlyPlayingAudioUri, handleFavorite, handlePlaySound } = useAudioData();
+  const { audioData, currentlyPlayingAudioUri, handlePlaySound } = useAudioData();
 
   const filteredData = audioData.filter((el) => el.isFavorite);
 
-  return <GestureHandlerRootView>
-    <ScrollView>
-      <ThemedView>
-        {filteredData.map((el) => <View key={el.uri} className='flex flex-row justify-between h-8'>
-          <Pressable onPress={() => handlePlaySound(el.uri)} className='flex flex-row gap-2'>
-            <Ionicons size={30} color="black" name={el.uri === currentlyPlayingAudioUri ? 'pause' : 'play'} />
-            <Text className='font-bold'>{el.title}</Text>
-          </Pressable>
-        </View>
-        )}
-      </ThemedView >
-    </ScrollView>
-  </GestureHandlerRootView>
+  return (
+    <GestureHandlerRootView>
+      <FlatList
+        data={filteredData}
+        keyExtractor={item => item.uri}
+        numColumns={3}
+        contentContainerStyle={{
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+          padding: 10,
+          gap: 10,
+        }}
+        renderItem={({ item }) => <FavSoundListItem currentlyPlayingAudioUri={currentlyPlayingAudioUri} el={item} handlePlaySound={handlePlaySound} />}
+      />
+    </GestureHandlerRootView>
+  )
 }
 
 export default Favorites;

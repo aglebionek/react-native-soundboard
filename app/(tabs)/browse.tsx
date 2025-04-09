@@ -1,27 +1,60 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { View, Pressable, Text } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { ThemedView } from '@/components/ThemedView';
+import { Text } from '@/components/common';
 import { useAudioData } from '@/contexts/AudioDataContext';
+import useThemeColors from '@/hooks/useThemeColors';
 
 const AudioList = () => {
   const { audioData, currentlyPlayingAudioUri, handleFavorite, handlePlaySound } = useAudioData();
-  
-  return <GestureHandlerRootView>
-    <ScrollView>
-      <ThemedView>
-        {audioData.map((el) => <View key={el.uri} className='flex flex-row justify-between h-8'>
-          <Pressable onPress={() => handlePlaySound(el.uri)} className='flex flex-row gap-2 w-[90%]'>
-            <Ionicons size={30} color="black" name={el.uri === currentlyPlayingAudioUri ? 'pause' : 'play'} />
-            <Text className='font-bold text-zinc-100'>{el.title}</Text>
-          </Pressable>
-          <Ionicons size={30} color={el.isFavorite ? "yellow" : "black"} name="heart" onPress={() => handleFavorite(el.uri)} />
-        </View>
-        )}
-      </ThemedView >
-    </ScrollView>
-  </GestureHandlerRootView>
+  const Colors = useThemeColors();
+
+  return (
+    <GestureHandlerRootView>
+      <View>
+        <ScrollView>
+          {audioData.map(el => {
+            const isElPlaying = el.uri === currentlyPlayingAudioUri;
+            const elPlayIconColor = isElPlaying ? Colors.tabIconSelected : Colors.tabIconDefault;
+            const elFavoriteIconColor = el.isFavorite ? Colors.tabIconSelected : Colors.tabIconDefault;
+
+            return (
+              <View key={el.uri} style={{ ...styles.view, borderBottomColor: Colors.highlightPinkDark }}>
+                <Pressable onPress={() => handlePlaySound(el.uri)} style={styles.pressable}>
+                  <Ionicons size={30} color={elPlayIconColor} name={isElPlaying ? 'pause' : 'play'} />
+                  <Text style={styles.text}>{el.title}</Text>
+                </Pressable>
+                <Ionicons size={30} color={elFavoriteIconColor} name={el.isFavorite ? 'heart' : 'heart-outline'} onPress={() => handleFavorite(el.uri)} />
+              </View>
+            )
+          })}
+        </ScrollView>
+      </View>
+    </GestureHandlerRootView >
+  )
 }
+
+
+const styles = StyleSheet.create({
+  view: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 40,
+    borderBottomWidth: 1,
+    alignItems: 'center',
+  },
+  pressable: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '90%',
+    gap: 5,
+  },
+  text: {
+    fontWeight: 'bold',
+    textAlignVertical: 'center',
+  }
+});
 
 export default AudioList;

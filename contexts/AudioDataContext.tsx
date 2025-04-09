@@ -1,5 +1,4 @@
 import { Audio } from "expo-av";
-import { getInfoAsync } from "expo-file-system";
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 import { AudioData } from "@/@types/AudioData";
