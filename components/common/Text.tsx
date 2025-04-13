@@ -1,9 +1,9 @@
 import { Text as NativeText, type TextProps } from 'react-native';
 
-import useThemeColors from '@/hooks/useThemeColors';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Text = (props: TextProps) => {
-    const COLORS = useThemeColors();
+    const { COLORS } = useTheme();
     return <NativeText {...props} style={[{ color: COLORS.text }, props.style]} />;
 }
 

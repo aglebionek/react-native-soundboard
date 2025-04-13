@@ -24,7 +24,7 @@ const AudioDataContext = createContext<AudioDataContextType>({
 
 
 const AudioDataProvider = ({ children }: { children: React.ReactNode }) => {
-    const { readFileFromCache, saveDataToCache } = useCache('data.json');
+    const { readFileFromCache, saveDataToCache } = useCache('audiodata.json');
 
     const currentlyPlayingAudioObject = useRef<{current: Audio.Sound | null}>({current: null}).current;
     const soundFiles: Record<string, Audio.Sound> = useRef({}).current;

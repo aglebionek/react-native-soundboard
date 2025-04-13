@@ -4,33 +4,31 @@ import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler
 
 import { Text } from '@/components/common';
 import { useAudioData } from '@/contexts/AudioDataContext';
-import useThemeColors from '@/hooks/useThemeColors';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const AudioList = () => {
   const { audioData, currentlyPlayingAudioUri, handleFavorite, handlePlaySound } = useAudioData();
-  const Colors = useThemeColors();
+  const { COLORS } = useTheme();
 
   return (
     <GestureHandlerRootView>
-      <View>
-        <ScrollView>
-          {audioData.map(el => {
-            const isElPlaying = el.uri === currentlyPlayingAudioUri;
-            const elPlayIconColor = isElPlaying ? Colors.tabIconSelected : Colors.tabIconDefault;
-            const elFavoriteIconColor = el.isFavorite ? Colors.tabIconSelected : Colors.tabIconDefault;
+      <ScrollView>
+        {audioData.map(el => {
+          const isElPlaying = el.uri === currentlyPlayingAudioUri;
+          const elPlayIconColor = isElPlaying ? COLORS.tabIconSelected : COLORS.tabIconDefault;
+          const elFavoriteIconColor = el.isFavorite ? COLORS.tabIconSelected : COLORS.tabIconDefault;
 
-            return (
-              <View key={el.uri} style={{ ...styles.view, borderBottomColor: Colors.highlightPinkDark }}>
-                <Pressable onPress={() => handlePlaySound(el.uri)} style={styles.pressable}>
-                  <Ionicons size={30} color={elPlayIconColor} name={isElPlaying ? 'pause' : 'play'} />
-                  <Text style={styles.text}>{el.title}</Text>
-                </Pressable>
-                <Ionicons size={30} color={elFavoriteIconColor} name={el.isFavorite ? 'heart' : 'heart-outline'} onPress={() => handleFavorite(el.uri)} />
-              </View>
-            )
-          })}
-        </ScrollView>
-      </View>
+          return (
+            <View key={el.uri} style={{ ...styles.view, borderBottomColor: `${COLORS.highlightPinkDark}99` }}>
+              <Pressable onPress={() => handlePlaySound(el.uri)} style={styles.pressable}>
+                <Ionicons size={30} color={elPlayIconColor} name={isElPlaying ? 'pause' : 'play'} />
+                <Text style={styles.text}>{el.title}</Text>
+              </Pressable>
+              <Ionicons size={30} color={elFavoriteIconColor} name={el.isFavorite ? 'heart' : 'heart-outline'} onPress={() => handleFavorite(el.uri)} />
+            </View>
+          )
+        })}
+      </ScrollView>
     </GestureHandlerRootView >
   )
 }
@@ -41,7 +39,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 40,
+    height: 42,
+    marginHorizontal: 10,
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
     borderBottomWidth: 1,
     alignItems: 'center',
   },

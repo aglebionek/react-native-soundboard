@@ -27,7 +27,7 @@ export const MainThemeColorsDark: Theme = {
   colors: {
     primary: 'rgb(37, 41, 46)', // primary color for your app, usually your brand color.
     background: 'transparent', // app background color
-    card: highlightPinkDark, // app top and bottom bar backgroud color
+    card: 'transparent', // app top and bottom bar backgroud color
     text: 'rgb(229, 229, 231)', // app topbar title color
     border: 'rgb(39, 39, 41)', // border color
     notification: 'rgb(255, 69, 58)', // notification color
