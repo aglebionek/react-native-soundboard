@@ -19,7 +19,7 @@ const FavSoundListItem = ({ currentlyPlayingAudioUri, el, handlePlaySound }: Sou
     const cutTitle = el.title.length > 16 ? `${el.title.slice(0, 10)}...` : el.title;
 
     return (
-        <View key={el.uri} style={{ ...styles.view, borderColor: `${COLORS.highlightPinkDark}99` }}>
+        <View key={el.uri} style={{ ...styles.view, borderColor: `${COLORS.borderColor}99` }}>
             <Pressable onPress={() => handlePlaySound(el.uri)} style={styles.pressable}>
                 <Ionicons size={30} color={isElPlaying ? COLORS.tabIconSelected : COLORS.tabIconDefault} name={isElPlaying ? 'pause' : 'play'} />
                 <Text style={styles.text}>{cutTitle}</Text>

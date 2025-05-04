@@ -19,7 +19,7 @@ const AudioList = () => {
           const elFavoriteIconColor = el.isFavorite ? COLORS.tabIconSelected : COLORS.tabIconDefault;
 
           return (
-            <View key={el.uri} style={{ ...styles.view, borderBottomColor: `${COLORS.highlightPinkDark}99` }}>
+            <View key={el.uri} style={{ ...styles.view, borderBottomColor: `${COLORS.borderColor}99` }}>
               <Pressable onPress={() => handlePlaySound(el.uri)} style={styles.pressable}>
                 <Ionicons size={30} color={elPlayIconColor} name={isElPlaying ? 'pause' : 'play'} />
                 <Text style={styles.text}>{el.title}</Text>

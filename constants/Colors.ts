@@ -2,24 +2,27 @@ import type { Theme } from "@react-navigation/native";
 
 const highlightPinkLight = '#C33593';
 const highlightPinkDark = '#802363';
-const backgroundBlueStart = '#2B2746';
-const backgroundBlueMiddle = '#221D40';
-const backgroundBlueEnd = '#05040C';
 const highlightGold = '#F4C45D';
 
-const tempColors = {
-  text: '#cdcdcd',
-  background: backgroundBlueStart,
-  tint: highlightPinkLight,
-  icon: '#9BA1A6',
-  tabIconDefault: highlightPinkLight,
-  tabIconSelected: highlightGold,
-  highlightPinkDark,
-}
-
 export const Colors = {
-  light: tempColors,
-  dark: tempColors,
+  light: {
+    text: '#cdcdcd',
+    backgroundStart: highlightPinkDark,
+    backgroundMiddle: highlightPinkDark,
+    backgroundEnd: highlightPinkLight,
+    borderColor: '#1B2746',
+    tabIconDefault: '#1B2746',
+    tabIconSelected: highlightGold,
+  },
+  dark: {
+    text: '#cdcdcd',
+    backgroundStart: '#2B2746',
+    backgroundMiddle: '#221D40',
+    backgroundEnd: '#05040C',
+    borderColor: highlightPinkDark,
+    tabIconDefault: highlightPinkLight,
+    tabIconSelected: highlightGold,
+  },
 };
 
 export const MainThemeColorsDark: Theme = {
@@ -34,11 +37,3 @@ export const MainThemeColorsDark: Theme = {
   },
 };
 
-export const COLORS = {
-  light: {
-
-  },
-  dark: {
-
-  }
-}

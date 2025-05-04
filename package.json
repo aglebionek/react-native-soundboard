@@ -5,12 +5,12 @@
   "scripts": {
     "start": "expo start --clear --android",
     "dev": "expo start",
+    "android": "expo run:android",
     "build:android": "expo prebuild --platform android && cd android && ./gradlew assembleRelease",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "test": "jest --watchAll",
-    "lint": "expo lint"
+    "install:android": "adb install ./android/app/build/outputs/apk/release/app-release.apk",
+    "prod": "npm run build:android && npm run install:android",
+    "lint": "expo lint",
+    "ios": "expo run:ios"
   },
   "jest": {
     "preset": "jest-expo"

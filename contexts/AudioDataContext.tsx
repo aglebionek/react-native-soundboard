@@ -8,6 +8,7 @@ import useCache from "@/hooks/useCache";
 
 type AudioDataContextType = {
     audioData: AudioData[];
+    audioDataLoaded: boolean;
     currentlyPlayingAudioUri: string | null;
     handleFavorite: (uri: string) => void;
     handlePlaySound: (uri: string) => void;
@@ -16,6 +17,7 @@ type AudioDataContextType = {
 
 const AudioDataContext = createContext<AudioDataContextType>({
     audioData: defaultData,
+    audioDataLoaded: false,
     currentlyPlayingAudioUri: null,
     handleFavorite: () => { },
     handlePlaySound: () => { },
@@ -30,6 +32,7 @@ const AudioDataProvider = ({ children }: { children: React.ReactNode }) => {
     const soundFiles: Record<string, Audio.Sound> = useRef({}).current;
 
     const [audioData, setAudioData] = useState<AudioData[]>(defaultData);
+    const [audioDataLoaded, setAudioDataLoaded] = useState(false);
     const [currentlyPlayingAudioUri, setCurrentlyPlayingAudioUri] = useState<string | null>(null);
 
     useEffect(() => {
@@ -40,6 +43,8 @@ const AudioDataProvider = ({ children }: { children: React.ReactNode }) => {
                 saveDataToCache(JSON.stringify(defaultData));
             } catch (error) {
                 console.error(`[ERROR] AudioDataProvider.readAudioDataFromCache \n ${error}`)
+            } finally {
+                setAudioDataLoaded(true);
             }
         }
         // could I cache those sounds? Would it make the loading faster?
@@ -89,7 +94,7 @@ const AudioDataProvider = ({ children }: { children: React.ReactNode }) => {
     }, [audioData])
 
     return (
-        <AudioDataContext.Provider value={{ audioData, currentlyPlayingAudioUri, handleFavorite, handlePlaySound, setAudioData }} >
+        <AudioDataContext.Provider value={{ audioData, audioDataLoaded, currentlyPlayingAudioUri, handleFavorite, handlePlaySound, setAudioData }} >
             {children}
         </AudioDataContext.Provider>
     );

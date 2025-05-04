@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "szynszyla",
+    "name": "Szynszyla Soundboard",
     "slug": "szynszyla",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/image.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/images/splash2.png",
+      "resizeMode": "center",
+      "backgroundColor": "#2B2746"
     },
     "ios": {
       "supportsTablet": true,
@@ -18,15 +18,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/image.png",
+        "backgroundColor": "#2B2746"
       },
       "package": "com.anonymous.szynszyla"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/image.png"
     },
     "plugins": [
       "expo-router",
